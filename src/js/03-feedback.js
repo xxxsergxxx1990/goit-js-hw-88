@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle';
 
-// 1st variant --------------------------------------------------
+
 
 // const LOCAL_KEY = 'feedback-form-state';
 // let formData = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
