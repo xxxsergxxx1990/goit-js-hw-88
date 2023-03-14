@@ -19,13 +19,13 @@ import throttle from 'lodash.throttle';
 
 // function onFormSubmit(e) {
 //   e.preventDefault();
-//   //      if (refs.input.value === "" || refs.textarea.value === "") {
-//   //          return alert(`Please fill in all the fields!`);
-//   //      }
-//   // or
-//   // const { email, message } = e.currentTarget.elements;
-//   // console.log({ email: email.value, message: message.value });
-//   // or
+//        if (refs.input.value === "" || refs.textarea.value === "") {
+//            return alert(`Please fill in all the fields!`);
+//        }
+//   or
+//   const { email, message } = e.currentTarget.elements;
+//   console.log({ email: email.value, message: message.value });
+//   or
 //   console.log(formData);
 //   e.currentTarget.reset();
 //   localStorage.removeItem(LOCAL_KEY);
@@ -42,43 +42,43 @@ import throttle from 'lodash.throttle';
 
 // 2nd variant -------- NEXT VARIANT WITHOUT OBJECT formData = {}; --------------------------------------
 
-// const LOCAL_KEY = 'feedback-form-state';
-// const form = document.querySelector('.feedback-form');
+const LOCAL_KEY = 'feedback-form-state';
+const form = document.querySelector('.feedback-form');
 
-// populateFeedbackForm();
-// form.addEventListener('submit', onFormSubmit);
-// form.addEventListener('input', throttle(onInputData, 500));
+populateFeedbackForm();
+form.addEventListener('submit', onFormSubmit);
+form.addEventListener('input', throttle(onInputData, 500));
 
-// function onFormSubmit(e) {
-//   e.preventDefault();
-//   const { email, message } = e.currentTarget.elements;
-//   console.log({ email: email.value, message: message.value });
-//   localStorage.removeItem(LOCAL_KEY);
-//   e.currentTarget.reset();
-// }
+function onFormSubmit(e) {
+  e.preventDefault();
+  const { email, message } = e.currentTarget.elements;
+  console.log({ email: email.value, message: message.value });
+  localStorage.removeItem(LOCAL_KEY);
+  e.currentTarget.reset();
+}
 
-// function onInputData(e) {
-//   let data = localStorage.getItem(LOCAL_KEY);
-//   data = data ? JSON.parse(data) : {};
-//   let { email, message } = form.elements;
-//   data = {
-//     email: email.value.trim(),
-//     message: message.value.trim(),
-//   };
+function onInputData(e) {
+  let data = localStorage.getItem(LOCAL_KEY);
+  data = data ? JSON.parse(data) : {};
+  let { email, message } = form.elements;
+  data = {
+    email: email.value.trim(),
+    message: message.value.trim(),
+  };
 
-//   // data[e.target.name] = e.target.value.trim(); // виводить в localStorage лише один ключ з значенням, якщо інший не заповнений
-//   localStorage.setItem(LOCAL_KEY, JSON.stringify(data));
-// }
+  data[e.target.name] = e.target.value.trim(); // виводить в localStorage лише один ключ з значенням, якщо інший не заповнений
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(data));
+}
 
-// function populateFeedbackForm() {
-//   let data = localStorage.getItem(LOCAL_KEY);
-//   if (data) {
-//     data = JSON.parse(data);
-//     Object.entries(data).forEach(([name, value]) => {
-//       form.elements[name].value = value ?? '';
-//     });
-//   }
-// }
+function populateFeedbackForm() {
+  let data = localStorage.getItem(LOCAL_KEY);
+  if (data) {
+    data = JSON.parse(data);
+    Object.entries(data).forEach(([name, value]) => {
+      form.elements[name].value = value ?? '';
+    });
+  }
+}
 
 // 3rd variant-------- NEXT VARIANT WITH OBJECT formData = {}; ----------------------------------------
 // виводить в localStorage лише один ключ з значенням, якщо інший не заповнений ------------
@@ -168,38 +168,38 @@ import throttle from 'lodash.throttle';
 // -----------
 
 //  ------------------------- NEXT VARIANT --------------
-const LOCAL_KEY = 'feedback-form-state';
+// const LOCAL_KEY = 'feedback-form-state';
 
-form = document.querySelector('.feedback-form');
+// form = document.querySelector('.feedback-form');
 
-form.addEventListener('input', throttle(onInputData, 500));
-form.addEventListener('submit', onFormSubmit);
+// form.addEventListener('input', throttle(onInputData, 500));
+// form.addEventListener('submit', onFormSubmit);
 
-let dataForm = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
-const { email, message } = form.elements;
-reloadPage();
+// let dataForm = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
+// const { email, message } = form.elements;
+// reloadPage();
 
-function onInputData(e) {
-  dataForm = { email: email.value, message: message.value };
-  localStorage.setItem(LOCAL_KEY, JSON.stringify(dataForm));
-}
+// function onInputData(e) {
+//   dataForm = { email: email.value, message: message.value };
+//   localStorage.setItem(LOCAL_KEY, JSON.stringify(dataForm));
+// }
 
-function reloadPage() {
-  if (dataForm) {
-    email.value = dataForm.email || '';
-    message.value = dataForm.message || '';
-  }
-}
+// function reloadPage() {
+//   if (dataForm) {
+//     email.value = dataForm.email || '';
+//     message.value = dataForm.message || '';
+//   }
+// }
 
-function onFormSubmit(e) {
-  e.preventDefault();
-  console.log({ email: email.value, message: message.value });
+// function onFormSubmit(e) {
+//   e.preventDefault();
+//   console.log({ email: email.value, message: message.value });
 
-  if (email.value === '' || message.value === '') {
-    return alert('Please fill in all the fields!');
-  }
+//   if (email.value === '' || message.value === '') {
+//     return alert('Please fill in all the fields!');
+//   }
 
-  localStorage.removeItem(LOCAL_KEY);
-  e.currentTarget.reset();
-  dataForm = {};
-}
+//   localStorage.removeItem(LOCAL_KEY);
+//   e.currentTarget.reset();
+//   dataForm = {};
+// }
