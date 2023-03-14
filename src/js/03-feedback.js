@@ -53,7 +53,7 @@ function onFormSubmit(e) {
   e.preventDefault();
   const { email, message } = e.currentTarget.elements;
   console.log({ email: email.value, message: message.value });
-  localStorage.removeItem(LOCAL_KEY);
+  // localStorage.removeItem(LOCAL_KEY);
   e.currentTarget.reset();
 }
 
